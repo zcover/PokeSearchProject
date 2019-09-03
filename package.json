@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "dotenv": "^8.1.0",
+    "ejs": "^2.7.1",
     "express": "^4.17.1",
     "nodemon": "^1.19.2",
     "pg": "^7.12.1",
