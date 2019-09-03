@@ -21,7 +21,7 @@ const url = 'https://pokeapi.co/api/v2/type/'
 
 function askApi(req, res){
   // const searchType = req.body.pokemonTyping;
-  const thesearch = 'water';
+  const thesearch = '';
   const queryUrl = `${url}${thesearch}`;
   console.log(queryUrl);
 
