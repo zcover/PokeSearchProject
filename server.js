@@ -47,7 +47,7 @@ function askApi(req, res){
 
     const newpokePath = pokePath.map(pokemon => {
       return new Pokemon(pokemon)
-    })
+    });
 
     console.log(newpokePath)
     res.render('./index', {resultPokemon : newpokePath})
