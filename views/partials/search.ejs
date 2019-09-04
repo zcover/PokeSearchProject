@@ -1,13 +1,21 @@
-<form action = "type-search" method = "POST">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Form Page</h1>
+    <h2>Please select a pokemon type you are interested in!</h2>
+    <p>Normal, Fighting, Fire, Water, Flying, Grass, Poison, Electric, Ground, Psychic, Rock, Ice, Bug, Dragon, Ghost, Dark, Steel or Fairy</p>
+    <form action = "/search-query" method = "POST">
+        <input type = "text" name="pokemonTyping" value="" required>
+        <input type = "hidden" name = "_method" value = "post">
+        <button>Submit</button>
+    </form>
 
-    <input type = "text" name="pokemonTyping" value="" required>
-    <button>Submit</button>
-</form>
 
-<ul>
-
-    <li>
-        <%= resultPokemon %>
-
-    </li>
-</ul>
+</body>
+</html>
