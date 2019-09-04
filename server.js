@@ -27,21 +27,39 @@ function askApi(req, res){
 
   //look at results
   superagent.get(queryUrl).then(result => {
-  //loops through first 25 pokemon of type
-  // for(let i = 0; i<25;i++){
-  //  let pokeres = result.body.pokemon[i].pokemon.name
-  //  console.log(`logging pokeRes ${pokeres}`)
-  //   //narrow down to individual name
-  // }
+    //   loops through first 25 pokemon of type
 
-  let pokeRes = result.body.pokemon[0].pokemon.name;
-  console.log(`logging pokeRes ${pokeRes}`);
+    // =====KEEEP JUST IN CASE!!!=====
+    //for(let i = 0; i<25;i++){
+    //    let pokeres = result.body.pokemon[i].pokemon.name
+    //    //narrow down to individual name
+    //    console.log(`logging pokeRes ${pokeres}`)
+    //    let pokeRes = result.body.pokemon[i].pokemon.name;
+    //    console.log(`logging pokeRes ${pokeRes}`);
+    //   };
+    // =================================
 
-  res.render('./index', {resultPokemon : pokeRes})
-}).catch(error => console.error(error))
+    let pokeRes = result.body.pokemon[0].pokemon.name;
+    console.log(`logging pokeres ${pokeRes}`);
+
+    const pokePath = result.body.pokemon.slice(0, 25)
+    console.log('logging pokepath', pokePath);
+
+    const newpokePath = pokePath.map(pokemon => {
+      return new Pokemon(pokemon)
+    })
+
+    console.log(newpokePath)
+    res.render('./index', {resultPokemon : newpokePath})
+  }).catch(error => console.error(error))
 }
 
 //narrow down to body
+function Pokemon(pokemon) {
+  this.name = pokemon.pokemon.name
+}
+
+
 
 
 
