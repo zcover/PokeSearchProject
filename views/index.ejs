@@ -8,9 +8,14 @@
 </head>
 <body>
     <h1>Hello World!</h1>
+    <ul>
 
-    <%= resultPokemon %>
-  <!-- <%- include('./partials/search') %> -->
-    
+      <% for(let i = 0; i<25; i++){ %>
+       <li>
+           <%= resultPokemon[i].name %>
+      </li>
+        <!-- <%- include('./partials/search') %> -->
+          <% } %>
+      </ul>
 </body>
 </html>
