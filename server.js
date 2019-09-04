@@ -14,7 +14,14 @@ app.set('view engine', 'ejs');
 //   res.render('./index');
 // });
 
-app.get('/home', askApi)
+const client = new pg.Client(DATABASE_URL);
+client.connect();
+client.on('error', (error) => console.error(error));
+
+
+app.get('/', askApi)
+app.get('/favorites', onePokemon)
+app.get('/detail', showSinglePokemon)
 
 //make a request from pokeApi
 const url = 'https://pokeapi.co/api/v2/type/'
@@ -59,9 +66,25 @@ function Pokemon(pokemon) {
   this.name = pokemon.pokemon.name
 }
 
+//save function
+function onePokemon(req, res) {
+  client.query('INSERT INTO type_query (+name) VALUES ($1)', [req.pokemon.pokemon.name]).then(() => {
+    res.redirect('/');
+  }).catch(error => {
+    res.render('./pages/error');
+    console.error(error);
+  })
+}
 
-
-
+function showSinglePokemon(req, res) {
+  client.query('SELECT * FROM books WHERE id = $1', [req.params.pokesearch_app]).then(sqlResult => {
+    // check that there is a valid result, show not found if not a valid result
+    res.render('./pages/pokemon/detail', { specificBook: sqlResult.rows[0] })
+  }).catch(error => {
+    res.render('./pages/error');
+    console.error(error);
+  })
+}
 
 
 
