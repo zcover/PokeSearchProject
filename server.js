@@ -23,7 +23,6 @@ app.use(methodOverride((req, res) =>{
   }
 }));
 
-
 // requests
 app.get('/', searchType)
 app.post('/search-query', askApi)
