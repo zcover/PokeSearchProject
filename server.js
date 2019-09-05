@@ -16,14 +16,14 @@ const url = 'https://pokeapi.co/api/v2/type/'
 const methodOverride = require('method-override');
 
 
-const client = new pg.Client(DATABASE_URL);
+const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', (error) => console.error(error));
 
 
-//app.get('/', askApi)
-//app.get('/favorites', onePokemon)
-//app.get('/detail', showSinglePokemon)
+// app.get('/', askApi)
+// app.get('/favorites', onePokemon)
+// app.get('/detail', showSinglePokemon)
 
 app.use(methodOverride((req, res) =>{
   if(req.body && typeof req.body === 'object' && '_method' in req.body){
@@ -35,8 +35,8 @@ app.use(methodOverride((req, res) =>{
 
 
 // requests
-//app.get('/', searchType)
-//app.post('/search-query', askApi)
+app.get('/', searchType)
+app.post('/search-query', askApi)
 
 
 // Functions
