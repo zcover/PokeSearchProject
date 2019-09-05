@@ -33,6 +33,8 @@ client.on('error', (error) => console.error(error));
 app.get('/', searchType)
 app.post('/search-query', askApi)
 app.post('/favorites', onePokemon)
+// app.post('/favorites' , deletePokemon)
+// app.post('/favorites' , pokemonDetails)
 app.post('/detail', showSinglePokemon)
 
 
@@ -95,9 +97,9 @@ function loadFavorites(req,res) {
 
 
 function showSinglePokemon(req, res) {
-  client.query('SELECT * FROM books WHERE id = $1', [req.params.pokesearch_app]).then(sqlResult => {
+  client.query('SELECT * FROM type_query WHERE id = $1', [req.body.pokesearch_app]).then(sqlResult => {
     // check that there is a valid result, show not found if not a valid result
-    res.render('./pages/pokemon/detail', { specificBook: sqlResult.rows[0] })
+    res.render('./pages/pokemon/detail', {resultPokemon : resultFromdb.rows })
   }).catch(error => {
     res.render('./pages/error');
     console.error(error);
@@ -105,10 +107,10 @@ function showSinglePokemon(req, res) {
 }
 
 //delete function
-function deleteBook(req, res) {
+function deletePokemon(req, res) {
   const id = req.params.name;
   console.log(id);
-  client.query('DELETE FROM books WHERE id = $1', [id]).then(() => {
+  client.query('DELETE FROM type_query WHERE id = $1', [id]).then(() => {
     res.redirect('/');
   }).catch(error => {
     res.render('./pages/error');
@@ -117,12 +119,12 @@ function deleteBook(req, res) {
 }
 
 //update function
-function showUpdateBook(req, res) {
+function pokemonDetails(req, res) {
   console.log(req.params)
-  client.query('SELECT * FROM books WHERE id = $1', [req.params.name]).then(sqlResult => {
+  client.query('SELECT * FROM type_query WHERE id = $1', [req.body.pokemonTyping]).then(sqlResult => {
     // check that there is a valid result, show not found if not a valid result
     console.log(sqlResult.rows)
-    res.render('./pages/books/edit', { specificBook: sqlResult.rows[0] })
+    res.render('./pages/detials/edit', {resultPokemon : resultFromdb.rows })
   }).catch(error => {
     res.render('./pages/error');
     console.error(error);
