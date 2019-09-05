@@ -14,13 +14,13 @@ const url = 'https://pokeapi.co/api/v2/type/'
 
 //middleware
 const methodOverride = require('method-override');
-  app.use(methodOverride((req, res) =>{
-    if(req.body && typeof req.body === 'object' && '_method' in req.body){
-      let method = req.body._method;
-      delete req.body._method
-      return method;
-    }
-  }));
+app.use(methodOverride((req, res) =>{
+  if(req.body && typeof req.body === 'object' && '_method' in req.body){
+    let method = req.body._method;
+    delete req.body._method
+    return method;
+  }
+}));
 
 
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -45,7 +45,7 @@ app.post('/detail', showSinglePokemon)
 ////////  constructor ////////
 function Pokemon(pokemon) {
   this.name = pokemon.pokemon.name
-};
+}
 
 //////// Helper Functions ////////
 
@@ -54,10 +54,10 @@ function onePokemon(req, res) {
   console.log('Deposited ', req.body.pokemonTyping, ' into pc')
   // type_query is currently the favorites database
   client.query('INSERT INTO type_query (name) VALUES ($1)', [req.body.pokemonTyping]).then(loadFavorites(req, res))
-  .catch(error => {
-    res.render('./pages/error');
-    console.error(error);
-  })
+    .catch(error => {
+      res.render('./pages/error');
+      console.error(error);
+    })
 }
 
 // Functions
@@ -84,19 +84,18 @@ function askApi(req, res){
 
 function loadFavorites(req,res) {
   client.query('SELECT * FROM type_query').then(resultFromdb => {
- 
- for(let i=0; i < resultFromdb.rows.length; i++){
-   console.log(resultFromdb.rows[i].name)
- }
-  
-  res.render('./pages/favorites.ejs', {resultPokemon : resultFromdb.rows, rowCount : resultFromdb.rowCount}); 
 
-  console.log('Withdrew ', resultFromdb.rows, ' from pc');
+    for(let i=0; i < resultFromdb.rows.length; i++){
+      console.log(' withdrawing ', resultFromdb.rows[i].name, ' from database')
+    }
+    res.render('./pages/favorites.ejs', {resultPokemon : resultFromdb.rows, rowCount : resultFromdb.rowCount});
+    console.log('I am logging resultFromdb.rows', resultFromdb.rows)
+    console.log('I am after the render')
   }).catch(error => {
     res.render('./pages/error');
     console.error(error);
   })
-};
+}
 //we should really put a .catch here
 
 
