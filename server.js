@@ -67,15 +67,23 @@ function Pokemon(pokemon) {
 
 //save function
 function onePokemon(req, res) {
-  console.log(req.body.pokemon)
-  // console.log(resultsPokemon)
-  client.query('INSERT INTO type_query (name) VALUES ($1)', [req.body.pokemon]).then(() => {
-    res.render('./pages/favorites.ejs');
-  }).catch(error => {a
+  console.log('Deposited ', req.body.pokemonTyping, ' into pc')
+  // type_query is currently the favorites database
+  client.query('INSERT INTO type_query (name) VALUES ($1)', [req.body.pokemonTyping]).then(loadFavorites(req, res))
+  .catch(error => {
     res.render('./pages/error');
     console.error(error);
   })
 }
+
+function loadFavorites(req,res) {
+  client.query('SELECT * FROM type_query WHERE name = $1', [req.body.pokemonTyping]).then(res.render('./pages/favorites.ejs'));
+  console.log('Withdrew ', req.body.pokemonTyping, ' from pc')
+};
+//we should really put a .catch here
+
+
+
 
 function showSinglePokemon(req, res) {
   client.query('SELECT * FROM books WHERE id = $1', [req.params.pokeseach_app]).then(sqlResult => {
