@@ -1,0 +1,16 @@
+body {
+    background: url(https://i.imgur.com/grh8U.jpg) top right no-repeat;
+    position: fixed;
+}
+
+li {
+    color: white;
+    font-size: 40px;
+    font-family: Pokemon Solid;
+    
+}
+
+@font-face {
+	font-family: Pokemon Solid;
+	src: url('../fonts/Pokemon\ Solid.ttf');
+}
