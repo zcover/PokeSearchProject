@@ -1,5 +1,9 @@
 <ul>
     <%  for(let i = 0; i<25;i++){ %>
-        <li> <%= resultPokemon[i].name %> </li>
-    <% } %>
+        <li> <%= resultPokemon[i].name %>
+        <form action="/favorites" method='POST'> 
+            <input type = "hidden" name="pokemonTyping" value="<%= resultPokemon[i].name %>" required>
+            <input type = "hidden" name = "_method" value = "post">
+            <button>save</button> </form> </li>
+            <% } %>
 </ul>
