@@ -48,8 +48,8 @@ function askApi(req, res){
 
   //look at results
   superagent.get(queryUrl).then(result => {
-    const pokePath = result.body.pokemon.slice(0, 25)
-    const newpokePath = pokePath.map(pokemon => {
+    const pokepath = result.body.pokemon
+    const newpokePath= pokepath.slice(0, 25).map(pokemon => {
       return new Pokemon(pokemon)
     });
     console.log('logging pokemon array', newpokePath);
@@ -60,7 +60,7 @@ function askApi(req, res){
 
 
 
-//narrow down to body
+//constructor
 function Pokemon(pokemon) {
   this.name = pokemon.pokemon.name
 }
@@ -77,8 +77,19 @@ function onePokemon(req, res) {
 }
 
 function loadFavorites(req,res) {
-  client.query('SELECT * FROM type_query WHERE name = $1', [req.body.pokemonTyping]).then(res.render('./pages/favorites.ejs'));
-  console.log('Withdrew ', req.body.pokemonTyping, ' from pc')
+  client.query('SELECT * FROM type_query').then(resultFromdb => {
+ 
+ for(let i=0; i < resultFromdb.rows.length; i++){
+   console.log(resultFromdb.rows[i].name)
+ }
+  
+  res.render('./pages/favorites.ejs', {resultPokemon : resultFromdb.rows, rowCount : resultFromdb.rowCount}); 
+
+  console.log('Withdrew ', resultFromdb.rows, ' from pc');
+  }).catch(error => {
+    res.render('./pages/error');
+    console.error(error);
+  })
 };
 //we should really put a .catch here
 
