@@ -32,7 +32,8 @@ client.on('error', (error) => console.error(error));
 // requests
 app.get('/', searchType)
 app.post('/search-query', askApi)
-app.post('/favorites', onePokemon)
+app.get('/favorites', onePokemon)
+// app.post('/favorites', onePokemon)
 app.post('/detail', showSinglePokemon)
 
 
