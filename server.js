@@ -37,19 +37,28 @@ app.post('/detail', showSinglePokemon)
 // app.get('/favorites', onePokemon)
 // app.get('/detail', showSinglePokemon)
 
-app.use(methodOverride((req, res) =>{
-  if(req.body && typeof req.body === 'object' && '_method' in req.body){
-    let method = req.body._method;
-    delete req.body._method
-    return method;
-  }
-}));
 
 
-// requests
-app.get('/', searchType)
-app.post('/search-query', askApi)
 
+
+
+////////  constructor ////////
+function Pokemon(pokemon) {
+  this.name = pokemon.pokemon.name
+};
+
+//////// Helper Functions ////////
+
+//save function
+function onePokemon(req, res) {
+  console.log('Deposited ', req.body.pokemonTyping, ' into pc')
+  // type_query is currently the favorites database
+  client.query('INSERT INTO type_query (name) VALUES ($1)', [req.body.pokemonTyping]).then(loadFavorites(req, res))
+  .catch(error => {
+    res.render('./pages/error');
+    console.error(error);
+  })
+}
 
 // Functions
 function searchType(req, res){
@@ -73,25 +82,6 @@ function askApi(req, res){
   }).catch(error => console.error(error))
 }
 
-
-
-
-//constructor
-function Pokemon(pokemon) {
-  this.name = pokemon.pokemon.name
-}
-
-//save function
-function onePokemon(req, res) {
-  console.log('Deposited ', req.body.pokemonTyping, ' into pc')
-  // type_query is currently the favorites database
-  client.query('INSERT INTO type_query (name) VALUES ($1)', [req.body.pokemonTyping]).then(loadFavorites(req, res))
-  .catch(error => {
-    res.render('./pages/error');
-    console.error(error);
-  })
-}
-
 function loadFavorites(req,res) {
   client.query('SELECT * FROM type_query').then(resultFromdb => {
  
@@ -108,8 +98,6 @@ function loadFavorites(req,res) {
   })
 };
 //we should really put a .catch here
-
-
 
 
 function showSinglePokemon(req, res) {
