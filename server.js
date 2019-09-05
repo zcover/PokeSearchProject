@@ -1,5 +1,6 @@
 'use strict'
 
+//global's
 const express = require('express');
 const superagent = require('superagent');
 const pg = require('pg');
@@ -21,8 +22,9 @@ app.use(methodOverride((req, res) =>{
     return method;
   }
 }));
+// End of Middleware
 
-
+// connect to database
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', (error) => console.error(error));
@@ -32,13 +34,6 @@ app.get('/', searchType)
 app.post('/search-query', askApi)
 app.post('/favorites', onePokemon)
 app.post('/detail', showSinglePokemon)
-
-// app.get('/', askApi)
-// app.get('/favorites', onePokemon)
-// app.get('/detail', showSinglePokemon)
-
-
-
 
 
 
@@ -60,7 +55,7 @@ function onePokemon(req, res) {
     })
 }
 
-// Functions
+
 function searchType(req, res){
   res.render('./partials/search.ejs');
 }
@@ -134,9 +129,5 @@ function showUpdateBook(req, res) {
   })
 }
 
-// showing favorites page
-function showfavorites(req, res){
-  res.render('./views/pages/favorites.ejs')
-}
 // ===== LISTENING ON ========
 app.listen(PORT, () => console.log(`up on port ${PORT}`));
