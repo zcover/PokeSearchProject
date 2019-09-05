@@ -1,23 +1,13 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-=======
-
 <%- include('../partials/header.ejs') %>
->>>>>>> 189de3b2df825c5c374519ed9870d42254583882
     <h1>welcome to the favorites page</h1>
     <ul>
         <%  for(let i=0; i < resultPokemon.length; i++){ %>
             <li><%= resultPokemon[i].name %></li>
             <% } %>
+            <form action="/favorites" method='DELETE'> 
+                <input type = "hidden" name="pokemonTyping" value="<%= resultPokemon[i].name %>" required>
+                <input type = "hidden" name = "_method" value = "delete">
+                <button>delete</button> </form> </li>
     </ul>
 </body>
 </html>

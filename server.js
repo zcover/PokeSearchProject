@@ -32,8 +32,8 @@ client.on('error', (error) => console.error(error));
 // requests
 app.get('/', searchType)
 app.post('/search-query', askApi)
-app.post('/favorites', onePokemon)
-// app.post('/favorites' , deletePokemon)
+app.get('/favorites', onePokemon)
+app.post('/favorites' , deletePokemon)
 // app.post('/favorites' , pokemonDetails)
 app.post('/detail', showSinglePokemon)
 
@@ -120,7 +120,6 @@ function deletePokemon(req, res) {
 
 //update function
 function pokemonDetails(req, res) {
-  console.log(req.params)
   client.query('SELECT * FROM type_query WHERE id = $1', [req.body.pokemonTyping]).then(sqlResult => {
     // check that there is a valid result, show not found if not a valid result
     console.log(sqlResult.rows)
