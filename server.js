@@ -101,7 +101,7 @@ function loadFavorites(req,res) {
 
 
 function showSinglePokemon(req, res) {
-  client.query('SELECT * FROM books WHERE id = $1', [req.params.pokeseach_app]).then(sqlResult => {
+  client.query('SELECT * FROM books WHERE id = $1', [req.params.pokesearch_app]).then(sqlResult => {
     // check that there is a valid result, show not found if not a valid result
     res.render('./pages/pokemon/detail', { specificBook: sqlResult.rows[0] })
   }).catch(error => {
