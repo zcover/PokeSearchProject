@@ -3,13 +3,6 @@ body {
     position: fixed;
 }
 
-li {
-    color: yellow;
-    font-size: 40px;
-    font-family: Pokemon Solid;
-    
-}
-
 @font-face {
 	font-family: Pokemon Solid;
 	src: url('../fonts/Pokemon\ Solid.ttf');
