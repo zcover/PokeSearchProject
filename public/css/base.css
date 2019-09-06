@@ -1,9 +1,24 @@
+html {
+    background: url(https://i.imgur.com/grh8U.jpg) no-repeat top right fixed
+}
+
 body {
-    background: url(https://i.imgur.com/grh8U.jpg) top right no-repeat;
-    position: fixed;
+    margin:0px auto;
+}
+
+nav{
+    /* width:960px; */
+    width:100%;
 }
 
 @font-face {
 	font-family: Pokemon Solid;
-	src: url('../fonts/Pokemon\ Solid.ttf');
+    src: url('../fonts/Pokemon\ Solid.ttf');
+}
+@font-face {
+    font-family: Pokemon Hollow;
+    src: url('../fonts/Pokemon\ Hollow.ttf')
+}
+nav li{
+    width: 100%;
 }
