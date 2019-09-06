@@ -1,12 +1,17 @@
 <%- include('header.ejs') %>
-    <h1>Form Page</h1>
+<div class = "column"></div>
     <h2>Please select a pokemon type you are interested in!</h2>
-    <p>Normal, Fighting, Fire, Water, Flying, Grass, Poison, Electric, Ground, Psychic, Rock, Ice, Bug, Dragon, Ghost, Dark, Steel or Fairy</p>
-    <form action = "/search-query" method = "POST">
+    <form id="searchForm" action = "/search-query" method = "POST">
         <input type = "text" name="pokemonTyping" value="" required>
         <input type = "hidden" name = "_method" value = "post">
-        <button>Submit</button>
+        <!-- <button>Submit</button> -->
     </form>
+    <div id = "searchtypes">
+        <p>Try:</p>
+        <div id="typediv">
+             <p class = "type" id = "normal">Normal</p>, <p class = "type" id = "fighting">Fighting </p>, <p class = "type" id="fire">Fire</p>, <p class = "type" id="water">Water</p>, <p class = "type" id="flying">Flying</p> , <p class = "type" id="grass">Grass</p>, <p class = "type" id="poison">Poison</p>, <p class = "type" id="electric">Electric</p> , <p class = "type" id="ground">Ground</p>, <p class = "type" id="psychic">Psychic</p>, <p class = "type" id="rock">Rock</p>, <p class = "type" id="ice">Ice</p>, <p class = "type" id="bug">Bug</p>, <p class = "type" id="dragon">Dragon</p>, <p class = "type" id="ghost">Ghost</p>, <p class = "type" id="dark">Dark</p>, <p class = "type" id="steel">Steel</p>, <p class = "type" id="fairy">Fairy</p>
+        </div>
+    </div>
 
 
 </body>
