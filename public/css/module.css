@@ -107,3 +107,6 @@ form input {
 #fairy{
     color:rgb(230, 136, 180)
 }
+#searchtypes :first-child{
+    font-family: Pokemon Solid;
+}
