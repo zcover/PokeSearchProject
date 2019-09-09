@@ -6,7 +6,7 @@ const superagent = require('superagent');
 const pg = require('pg');
 const app = express();
 require('dotenv').config();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static('public'));
