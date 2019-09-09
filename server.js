@@ -33,8 +33,6 @@ client.on('error', (error) => console.error(error));
 app.get('/', searchType)
 app.post('/search-query', askApi)
 app.post('/favorites', onePokemon)
-// app.post('/favorites' , deletePokemon)
-// app.post('/favorites' , pokemonDetails)
 app.post('/detail', showSinglePokemon)
 app.get('/favorites', onePokemon)
 
@@ -87,8 +85,6 @@ function loadFavorites(req,res) {
       console.log(' withdrawing ', resultFromdb.rows[i].name, ' from database')
     }
     res.render('./pages/favorites.ejs', {resultPokemon : resultFromdb.rows, rowCount : resultFromdb.rowCount});
-    // console.log('I am logging resultFromdb.rows', resultFromdb.rows)
-    // console.log('I am after the render')
   }).catch(error => {
     res.render('./pages/error');
     console.error(error);
