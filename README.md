@@ -54,7 +54,7 @@ Driving/Navigating too long<br>
     - **_STOP_** Code<br>
     - Swap driver/navigator, and consider taing a break.
 
-_In Charge_ Complex <br>
+_In-Charge_ Complex <br>
     - **Stop** Current stuff<br>
     - Identify feelings of unheard/left out/unrecognized<br>
     - Understand, then find and meet common ground<br>
