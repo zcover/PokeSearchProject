@@ -1,0 +1,31 @@
+li {
+    color: yellow;
+    font-size: 40px;
+    font-family: Pokemon Solid;
+}
+
+h2 {
+    margin-top:15%;
+    font-size: 32px;
+    font-family: Pokemon Solid;
+    color:black;;
+    text-align:center;
+}
+form{
+    text-align: center;
+    margin:2%;
+}
+
+a {
+    color:yellow;
+}
+
+p {
+    text-align: center;
+}
+div {
+    align-content: center;
+}
+.results{
+    border: solid rgba(117, 126, 135, 0.625) 2em;
+}
