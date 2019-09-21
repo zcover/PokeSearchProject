@@ -1,14 +1,5 @@
 html {
-    background: url(https://i.imgur.com/grh8U.jpg) no-repeat top right fixed
-}
-
-body {
-    margin:0px auto;
-}
-
-nav{
-    /* width:960px; */
-    width:100%;
+    background: url(https://wallpaperaccess.com/full/24936.jpg) no-repeat top fixed
 }
 
 @font-face {
@@ -18,7 +9,4 @@ nav{
 @font-face {
     font-family: Pokemon Hollow;
     src: url('../fonts/Pokemon\ Hollow.ttf')
-}
-nav li{
-    width: 100%;
 }

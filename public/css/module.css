@@ -21,6 +21,26 @@ nav li {
     font-family: Pokemon Solid;
 }
 
+
+#about{
+    margin-left:76%;
+    margin-top: 2%;
+    color: yellow;
+    font-size: 40px;
+    font-family: Pokemon Solid;
+}
+
+
+
+#login{
+    margin-left:76%;
+    margin-top: 2%;
+    color: yellow;
+    font-size: 40px;
+    font-family: Pokemon Solid;
+}
+
+
 #searchtypes {
     font-family: Pokemon Hollow;
     text-align: center;
