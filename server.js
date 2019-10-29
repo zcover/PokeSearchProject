@@ -12,8 +12,9 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static('public'));
 
 //////// Global Variable /////
-const regexForNum = /\/[0-9]?([0-9])\//g
-const url = 'https://pokeapi.co/api/v2/type/'
+// const regexForNum = /\/[0-9]?([0-9])\//g
+const regexForNum = /\/\d{1,4}\//g;
+const url = 'https://pokeapi.co/api/v2/type/';
 const spriteUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
 
 
@@ -55,6 +56,7 @@ function Pokemon(pokemonData) {
 Pokemon.prototype.spritePath = function(pokemonData){
   let spritePath = pokemonData.pokemon.url;
   let spriteNum = spritePath.match(regexForNum)
+  
   this.spriteNum = spriteNum;
 
   this.spritePath = pokemonData.pokemon.url;
