@@ -1,5 +1,6 @@
 <%- include('./header.ejs') %>
 <ul>
+    
     <%  for(let i = 0; i<25;i++){ %>
         <li class="results"> <%= resultPokemon[i].name %>
         <form action="/favorites" method='POST'> 

@@ -10,7 +10,11 @@ const PORT = process.env.PORT || 3002;
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true}));
 app.use(express.static('public'));
+
+//////// Global Variable /////
+const regexForNum = /\/[0-9]?([0-9])\//g
 const url = 'https://pokeapi.co/api/v2/type/'
+const spriteUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
 
 
 //middleware
@@ -30,7 +34,7 @@ client.connect();
 client.on('error', (error) => console.error(error));
 
 // requests
-app.get('/', searchType)
+app.get('/', searchByType)
 app.post('/search-query', askApi)
 app.post('/favorites', onePokemon)
 app.post('/detail', showSinglePokemon)
@@ -38,10 +42,23 @@ app.get('/favorites', onePokemon)
 
 
 
+
 ////////  constructor ////////
-function Pokemon(pokemon) {
-  this.name = pokemon.pokemon.name
+function Pokemon(pokemonData) {
+  this.name = pokemonData.pokemon.name;
+  this.spritePath(pokemonData);
 }
+
+
+
+//////// constructor prototype /////
+Pokemon.prototype.spritePath = function(pokemonData){
+  let spritePath = pokemonData.pokemon.url;
+  let spriteNum = spritePath.match(regexForNum)
+  this.spriteNum = spriteNum;
+
+  this.spritePath = pokemonData.pokemon.url;
+};
 
 //////// Helper Functions ////////
 
@@ -57,33 +74,41 @@ function onePokemon(req, res) {
 }
 
 
-function searchType(req, res){
+function searchByType(req, res){
   res.render('./partials/search.ejs');
 }
 
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+//Currently working here, need to adjust pokemon constructor and create prototypes.
 function askApi(req, res){
   const searchType = req.body.pokemonTyping.toLowerCase();
-  console.log('the search results include:', searchType)
+  console.log('the search query is:', searchType)
   const queryUrl = `${url}${searchType}`;
   console.log(queryUrl);
 
   //look at results
   superagent.get(queryUrl).then(result => {
-    const pokepath = result.body.pokemon
-    const newpokePath= pokepath.slice(0, 25).map(pokemon => {
-      return new Pokemon(pokemon)
+
+    const apiData = result.body.pokemon
+    // console.log('this is apidata:\n', apiData)
+    // console.log('end of apidata')
+
+    let newPokePath = apiData.map(pokemonData => {
+      return new Pokemon(pokemonData)
     });
-    console.log('logging pokemon array', newpokePath);
-    res.render('partials/searchResult.ejs', {resultPokemon : newpokePath})
+    console.log('logging pokemon array', newPokePath);
+    res.render('partials/searchResult.ejs', {resultPokemon : newPokePath})
   }).catch(error => console.error(error))
 }
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function loadFavorites(req,res) {
   client.query('SELECT * FROM type_query').then(resultFromdb => {
 
-    for(let i=0; i < resultFromdb.rows.length; i++){
-      console.log(' withdrawing ', resultFromdb.rows[i].name, ' from database')
-    }
+    resultFromdb.rows.forEach(pokemonResultRow => {
+      console.log('withdrawing ', pokemonResultRow.name, ' from database.')
+    })
     res.render('./pages/favorites.ejs', {resultPokemon : resultFromdb.rows, rowCount : resultFromdb.rowCount});
   }).catch(error => {
     res.render('./pages/error');
