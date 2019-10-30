@@ -13,7 +13,9 @@ app.use(express.static('public'));
 
 //////// Global Variable /////
 // const regexForNum = /\/[0-9]?([0-9])\//g
-const regexForNum = /\/\d{1,4}\//g;
+// const regexForNum = /\/(\d+)\//g;
+const regexForNum = /\/\d?(\d+)/g
+
 const url = 'https://pokeapi.co/api/v2/type/';
 const spriteUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
 
@@ -54,12 +56,29 @@ function Pokemon(pokemonData) {
 
 //////// constructor prototype /////
 Pokemon.prototype.spritePath = function(pokemonData){
-  let spritePath = pokemonData.pokemon.url;
-  let spriteNum = spritePath.match(regexForNum)
-  
-  this.spriteNum = spriteNum;
+  const spritePath = pokemonData.pokemon.url;
+  const spriteFilter = spritePath.match(regexForNum)
+  const spriteNum = spriteFilter[0].replace('/', '')
+
 
   this.spritePath = pokemonData.pokemon.url;
+  this.spriteNum = spriteNum;
+
+
+  this.spriteApiLink = spriteUrl+spriteNum;
+
+
+
+  // this.spriteTest = spritePath.forEach(element => {
+  //   // console.log('element:\n', element)
+  //   const regElement = element.match(regexForNum)
+  //   // console.log('regex element:\n', regElement)
+  //   const spriteNum = regElement[0].replace('/', '')
+  //   // console.log('chopped:\n', spriteNum)
+  //   return spriteNum
+  // })
+
+
 };
 
 //////// Helper Functions ////////
