@@ -60,23 +60,10 @@ Pokemon.prototype.spritePath = function(pokemonData){
   const spriteFilter = spritePath.match(regexForNum)
   const spriteNum = spriteFilter[0].replace('/', '')
 
-
-  this.spritePath = pokemonData.pokemon.url;
+  // this.spritePath = pokemonData.pokemon.url;
   this.spriteNum = spriteNum;
 
-
   this.spriteApiLink = spriteUrl+spriteNum;
-
-
-
-  // this.spriteTest = spritePath.forEach(element => {
-  //   // console.log('element:\n', element)
-  //   const regElement = element.match(regexForNum)
-  //   // console.log('regex element:\n', regElement)
-  //   const spriteNum = regElement[0].replace('/', '')
-  //   // console.log('chopped:\n', spriteNum)
-  //   return spriteNum
-  // })
 
 
 };
@@ -101,7 +88,7 @@ function searchByType(req, res){
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-//Currently working here, need to adjust pokemon constructor and create prototypes.
+
 function askApi(req, res){
   const searchType = req.body.pokemonTyping.toLowerCase();
   console.log('the search query is:', searchType)
@@ -110,18 +97,16 @@ function askApi(req, res){
 
   //look at results
   superagent.get(queryUrl).then(result => {
-
     const apiData = result.body.pokemon
-    // console.log('this is apidata:\n', apiData)
-    // console.log('end of apidata')
 
-    let newPokePath = apiData.map(pokemonData => {
+    const pokemonByTypeArray = apiData.map(pokemonData => {
       return new Pokemon(pokemonData)
     });
-    console.log('logging pokemon array', newPokePath);
-    res.render('partials/searchResult.ejs', {resultPokemon : newPokePath})
+    console.log('logging pokemon array', pokemonByTypeArray);
+    res.render('partials/searchResult.ejs', {TypeResultsPokemon : pokemonByTypeArray})
   }).catch(error => console.error(error))
 }
+
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function loadFavorites(req,res) {
