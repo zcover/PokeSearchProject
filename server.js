@@ -65,36 +65,13 @@ Pokemon.prototype.spritePath = function(pokemonData){
   this.spriteApiLink = spriteUrl+spriteNum+'.png';
 };
 
-
-
-
-
-
-
-
-
-
-
 Pokemon.prototype.pokemonName = function(pokemonData){
   const onePokemonName = pokemonData.pokemon.name;
-  // this.name = onePokemonName;
   const firstLetterCapitalized = onePokemonName.charAt(0).toUpperCase()
-
   const updatedName = onePokemonName.replace(onePokemonName.charAt(0), firstLetterCapitalized)
-  // var res = str.charAt(0).toLowerCase()
 
   this.name = updatedName
 }
-
-
-
-
-
-
-
-
-
-
 
 //////// Helper Functions ////////
 
