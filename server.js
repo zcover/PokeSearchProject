@@ -63,7 +63,7 @@ Pokemon.prototype.spritePath = function(pokemonData){
   // this.spritePath = pokemonData.pokemon.url;
   this.spriteNum = spriteNum;
 
-  this.spriteApiLink = spriteUrl+spriteNum;
+  this.spriteApiLink = spriteUrl+spriteNum+'.png';
 
 
 };

@@ -4,7 +4,7 @@
     <%  for(let i = 0; i<25;i++){ %>
         <ul>
             <li class="results"> <%= TypeResultsPokemon[i].name %>
-                <img src = '<%= TypeResultsPokemon[i].spriteApiLink %>'
+                <img src = '<%= TypeResultsPokemon[i].spriteApiLink %>'>
                 <form action="/favorites" method='POST'> 
                     <input type = "hidden" name="pokemonTyping" value="<%= TypeResultsPokemon[i].name %>" required>
                     <input type = "hidden" name = "_method" value = "post">
