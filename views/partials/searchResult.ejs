@@ -1,15 +1,18 @@
 <%- include('./header.ejs') %>
-<ul>
-    
-    <%  for(let i = 0; i<25;i++){ %>
-        <ul>
-            <li class="results"> <%= TypeResultsPokemon[i].name %>
-                <img src = '<%= TypeResultsPokemon[i].spriteApiLink %>'>
+
+<h2>Total Results: <%=TypeResultsPokemon.length%></h2>
+
+    <%  for(let i = 0; i<TypeResultsPokemon.length ; i++){ %>
+        <ul class = "results">
+            <li>
+                <img  src = '<%= TypeResultsPokemon[i].spriteApiLink || TypeResultsPokemon[i].placeholdImageLink %>'>
+            </li>    
+            <li><%= TypeResultsPokemon[i].name %></li>
+            <li>
                 <form action="/favorites" method='POST'> 
-                    <input type = "hidden" name="pokemonTyping" value="<%= TypeResultsPokemon[i].name %>" required>
-                    <input type = "hidden" name = "_method" value = "post">
-                    <button>save</button> </form> 
+                <input type = "hidden" name="pokemonTyping" value="<%= TypeResultsPokemon[i].name %>" required>
+                <input type = "hidden" name = "_method" value = "post">
+                <button>save</button> </form> 
             </li>
-                <% } %>
         </ul>
-</ul>
+        <% }; %>
