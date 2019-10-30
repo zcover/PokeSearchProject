@@ -17,7 +17,7 @@ app.use(express.static('public'));
 const regexForNum = /\/\d?(\d+)/g
 
 const url = 'https://pokeapi.co/api/v2/type/';
-const spriteUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'
+const spriteUrl = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
 
 
 //middleware
@@ -48,7 +48,8 @@ app.get('/favorites', onePokemon)
 
 ////////  constructor ////////
 function Pokemon(pokemonData) {
-  this.name = pokemonData.pokemon.name;
+  // this.name = pokemonData.pokemon.name;
+  this.pokemonName(pokemonData);
   this.spritePath(pokemonData);
 }
 
@@ -60,13 +61,40 @@ Pokemon.prototype.spritePath = function(pokemonData){
   const spriteFilter = spritePath.match(regexForNum)
   const spriteNum = spriteFilter[0].replace('/', '')
 
-  // this.spritePath = pokemonData.pokemon.url;
   this.spriteNum = spriteNum;
-
   this.spriteApiLink = spriteUrl+spriteNum+'.png';
-
-
 };
+
+
+
+
+
+
+
+
+
+
+
+Pokemon.prototype.pokemonName = function(pokemonData){
+  const onePokemonName = pokemonData.pokemon.name;
+  // this.name = onePokemonName;
+  const firstLetterCapitalized = onePokemonName.charAt(0).toUpperCase()
+
+  const updatedName = onePokemonName.replace(onePokemonName.charAt(0), firstLetterCapitalized)
+  // var res = str.charAt(0).toLowerCase()
+
+  this.name = updatedName
+}
+
+
+
+
+
+
+
+
+
+
 
 //////// Helper Functions ////////
 
