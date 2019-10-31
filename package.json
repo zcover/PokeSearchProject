@@ -4,7 +4,7 @@
   "description": "> Creators:<br> John Bavendim<br> Zerek Cover",
   "main": "server.js",
   "dependencies": {
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
     "favicon": "0.0.2",

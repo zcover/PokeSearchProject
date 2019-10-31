@@ -27,7 +27,7 @@ div {
     align-content: center;
 }
 .results{
-    border: solid rgba(117, 126, 135) 1em;
+    border: solid rgba(117, 126, 135) .5em;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
