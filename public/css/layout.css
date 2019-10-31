@@ -27,5 +27,9 @@ div {
     align-content: center;
 }
 .results{
-    border: solid rgba(117, 126, 135, 0.625) 2em;
+    border: solid rgba(117, 126, 135) 1em;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
 }

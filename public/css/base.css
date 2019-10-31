@@ -1,9 +1,12 @@
 html {
-    background: url(https://wallpaperaccess.com/full/24936.jpg) no-repeat top fixed
+    background: url(https://wallpaperaccess.com/full/24936.jpg) no-repeat top fixed;
+    width:auto;
 }
 
 body {
     margin:0px auto;
+    width:100%;
+    align-content: center;
 }
 nav{
     /* width:960px; */
