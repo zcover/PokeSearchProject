@@ -4,12 +4,13 @@
   "description": "> Creators:<br> John Bavendim<br> Zerek Cover",
   "main": "server.js",
   "dependencies": {
-    "dotenv": "^8.1.0",
+    "dotenv": "^8.2.0",
     "ejs": "^2.7.1",
     "express": "^4.17.1",
+    "favicon": "0.0.2",
     "method": "^2.0.0",
     "method-override": "^3.0.0",
-    "nodemon": "^1.19.2",
+    "nodemon": "^1.19.4",
     "pg": "^7.12.1",
     "superagent": "^5.1.0"
   },
